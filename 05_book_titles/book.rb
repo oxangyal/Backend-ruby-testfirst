@@ -2,7 +2,7 @@ class Book
 
     # write your code here
 
-    attr_reader :title
+    attr_accessor :title
 
     def title=(new_title)
         little_words = %w[a an the and in of over]
