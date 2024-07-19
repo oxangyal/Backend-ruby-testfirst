@@ -23,10 +23,25 @@ def translate_word(string)
 end
 
 def translate(string)
-  result = ""
-  words = string.split(" ")
-  for word in words
-    result += translate_word(word) + " "
-  end
-  return result[0, result.length - 1]
+punctuation_marks = [".", ",", "!", "?", ":", ";"]
+result = []
+words = string.split(" ")
+
+words.each do |word|
+  punctuation = ''
+  punctuation = word[-1] if punctuation_marks.include?(word[-1])
+  word = word.chop if punctuation != ''
+  
+  capitalize = word[0] == word[0].upcase
+  word = word.downcase if capitalize
+
+  translated_word = translate_word(word)
+  
+  translated_word += punctuation
+  translated_word.capitalize! if capitalize
+
+  result << translated_word
+end
+
+result.join(" ")
 end
